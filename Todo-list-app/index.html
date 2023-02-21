@@ -5,10 +5,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <!-- The fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Links to style sheet and script -->
     <link rel = 'stylesheet' href='style.css'/>
     <script defer src='script.js'></script>
   </head>
   <body>
-    <main class="todo-list"></main>
+    <div class="todo-list">
+      <!-- Here's the header with the logo -->
+      <header class="todo-list-header">
+        <img class = "logo" src="logo.png" alt="todo-list image">
+      </header>
+      
+      <main class="todo-list-app">
+      <!-- Here's the todo list options -->
+      <div class="todo-list-options">
+        <div class="task-count">Tasks (1)</div>
+        <div class="actions">
+         <ion-icon class = "options-icon" name="filter-sharp"></ion-icon>
+         <ion-icon class = "options-icon" name="add-circle-outline"></ion-icon>
+        </div>
+      </div>
+      </main>
+
+    </div>
+
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   </body>
 </html
