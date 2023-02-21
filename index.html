@@ -19,9 +19,8 @@
       <header class="todo-list-header">
         <img class = "logo" src="Images/logo.png" alt="todo-list image">
       </header>
-      
       <main class="todo-list-app">
-      <!-- Here's the todo list options -->
+      <!-- Here's the todo list options such as filthering-->
       <div class="todo-list-options">
         <div class="task-count">Tasks (1)</div>
         <div class="actions">
@@ -29,8 +28,8 @@
          <ion-icon class = "options-icon" name="add-circle-outline"></ion-icon>
         </div>
       </div>
-
-      <div class="todo-list-tasks">
+      <!-- Here are all the individual task to accoplish -->
+      <section class="section-todo-list-task">
         <div class="todo-list-task">
           <div class="task-left">
             <ion-icon class="task-uncheck" name="ellipse-outline"></ion-icon>
@@ -43,13 +42,62 @@
             <ion-icon class="task-option tash-option-info" name="information-circle-outline"></ion-icon>
           </div>
         </div>
-      </div>
-
-
-
+      </section>
       </main>
-
     </div>
+
+    <!-- Overlay that's used when the modal appears -->
+    <div class="overlay"></div>
+
+    <!-- The modal that't collects input to create a task -->
+    <section class="section-task-input-modal">
+      <header class="task-input-header">
+        <h2 class="task-input-heading">Add Task</h2>
+        <button class="close-modal-btn">
+        <ion-icon name="close-sharp"></ion-icon>
+      </button>
+      </header>
+      <div class="task-input-modal">
+
+        <!-- The form that includes all input -->
+        <form id="form" name="form">
+          <div class="task-input-title">    
+            <div class="input-container">
+            <label class="task-input-label" id="modal-title-label" for="modal-title">Title<span class="required-input">*</span></label>
+            <input class="user-input user-input-title" type="text" id="modal-title" name="modal-title">
+            </div>
+          </div>
+  
+          <div class="task-input-description">
+              <label class="task-input-label" id="model-description-label" for="modal-description">Description</label>
+              <textarea  class="user-input" name="description-text" id="modal-description" cols="30" rows="4"></textarea>
+            </div>
+          </div>
+  
+          <div class="task-input-date">
+            <div class="input-container">
+              <label class="task-input-label" id="modal-date-label" for="modal-date">Due Date<span class="required-input">*</span></label>
+              <input class="user-input user-input-date" type="date" id="modal-date" name="modal-date">
+            </div>
+          </div>
+  
+          <div class="task-input-priority">
+            <div class="input-container">
+              <label class="task-input-label" id="modal-priority-label" for="modal-priority">Priority<span class="required-input">*</span></label>
+              <select name="priority" id="priority" class="user-input user-input-priority">
+                <option value="low">Not important</option>
+                <option value="medium">Slightly important</option>
+                <option value="high">Very important</option>
+              </select>
+            </div>
+          </div>
+        </form>
+        <div class="modal-buttons">
+          <button class="task-input-cancel">Cancel</button>
+          <button class="task-input-add">Add</button>
+        </div>
+      </div>
+    </section>
 
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

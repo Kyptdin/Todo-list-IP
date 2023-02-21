@@ -131,3 +131,136 @@ body {
 .task-date {
   color: #127aff;
 }
+
+/*TASK INPUT MODAL*/
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(0.1px);
+  z-index: 100;
+  transition: all 0.5s;
+  z-index: 1;
+}
+
+.section-task-input-modal {
+  position: absolute;
+  position: relative;
+  width: 30vw;
+  height: 85vh;
+  background-color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.task-input-header {
+  background: linear-gradient(285deg, #00f3ff, #127aff, rgba(53, 36, 255, 1));
+  padding: 1.2rem 2.5rem;
+}
+
+.task-input-heading {
+  color: white;
+  font-weight: 500;
+  font-size: 2.2rem;
+}
+
+.close-modal-btn {
+  color: white;
+  position: absolute;
+  font-size: 4rem;
+  top: 0.1%;
+  right: 2%;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.task-input-label {
+  font-size: 1.8rem;
+}
+
+.required-input {
+  font-family: inherit;
+  color: #e67b7b;
+}
+
+.user-input {
+  border: 1px solid #c7c7c7;
+  margin-bottom: 1.2rem;
+  font-family: inherit;
+}
+
+.task-input-modal {
+  padding: 1rem 2rem;
+}
+
+.user-input:focus {
+  border: none;
+  outline: none;
+  border: 2px solid #127aff;
+}
+
+.user-input-title {
+  padding: 1rem;
+}
+
+.user-input-date {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.user-input-priority {
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.modal-buttons button {
+  font-family: inherit;
+  padding: 1rem 1.7rem;
+  transform: 0.3s;
+  cursor: pointer;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.2rem;
+}
+
+.task-input-add {
+  background-color: #127aff;
+  color: white;
+  border: none;
+  transition: 0.3s;
+}
+
+.task-input-add:hover {
+  background-color: #0e62cc;
+}
+
+.task-input-cancel {
+  background-color: transparent;
+  border: 2px solid #e6e6e6;
+  transition: 0.3s;
+}
+
+.task-input-cancel:hover {
+  color: #127aff;
+  border: none;
+  border: 2px solid #127aff;
+}
