@@ -11,7 +11,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Links to style sheet and script -->
     <link rel = 'stylesheet' href='style.css'/>
-    <script defer src='Scripts/script.js'></script>
+    <!-- All the scripts that make the todo list work -->
+    <script defer src='Scripts/local-storage-test.js'></script>
+    <script defer src='Scripts/Modal.js'></script>
+    <script defer src='Scripts/Task.js'></script>
+    <script defer src='Scripts/Todo-list.js'></script>
   </head>
   <body>
     <div class="todo-list">
@@ -47,17 +51,17 @@
     </div>
 
     <!-- Overlay that's used when the modal appears -->
-    <div class="overlay"></div>
+    <div class="overlay overlay-task hidden"></div>
 
     <!-- The modal that't collects input to create a task -->
-    <section class="section-task-input-modal">
-      <header class="task-input-header">
-        <h2 class="task-input-heading">Add Task</h2>
+    <section class="section-task-input-modal hidden">
+      <header class="modal-header modal-header-task">
+        <h2 class="modal-heading">Add Task</h2>
         <button class="close-modal-btn">
         <ion-icon name="close-sharp"></ion-icon>
       </button>
       </header>
-      <div class="task-input-modal">
+      <div class="modal-body">
 
         <!-- The form that includes all input -->
         <form id="form" name="form">
@@ -99,6 +103,21 @@
         </div>
       </div>
     </section>
+
+    
+    <div class="overlay overlay-error hidden"></div>
+    
+    <div class="error-message hidden">
+      <header class="modal-header modal-header-error">
+        <h2 class="modal-heading">Error</h2>
+      </header>
+      <div class="modal-body">
+        <p class="modal-message">Please fill out all the required inputs</p>
+        <div class="modal-buttons">
+          <button class="close-error">OK</button>
+        </div>
+      </div>
+    </div>
 
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

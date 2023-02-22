@@ -9,6 +9,12 @@ html {
   box-sizing: border-box;
 }
 
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+  display: none;
+}
+
 body {
   font-family: "Poppins", sans-serif;
   color: #444;
@@ -139,11 +145,18 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(0.1px);
-  z-index: 100;
   transition: all 0.5s;
-  z-index: 1;
+}
+
+.overlay-task {
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 7;
+}
+
+.overlay-error {
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 9;
 }
 
 .section-task-input-modal {
@@ -155,16 +168,23 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 2;
+  z-index: 8;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
-.task-input-header {
-  background: linear-gradient(285deg, #00f3ff, #127aff, rgba(53, 36, 255, 1));
+.modal-header {
   padding: 1.2rem 2.5rem;
 }
 
-.task-input-heading {
+.modal-header-task {
+  background: linear-gradient(285deg, #00f3ff, #127aff, rgba(53, 36, 255, 1));
+}
+
+.modal-header-error {
+  background: linear-gradient(90deg, #ff0037, rgba(255, 144, 168, 1));
+}
+
+.modal-heading {
   color: white;
   font-weight: 500;
   font-size: 2.2rem;
@@ -202,7 +222,7 @@ body {
   font-family: inherit;
 }
 
-.task-input-modal {
+.modal-body {
   padding: 1rem 2rem;
 }
 
@@ -263,4 +283,34 @@ body {
   color: #127aff;
   border: none;
   border: 2px solid #127aff;
+}
+
+.error-message {
+  position: absolute;
+  height: auto;
+  width: 25vw;
+  background-color: white;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.modal-message {
+  font-size: 1.6rem;
+  margin-bottom: 1.2rem;
+}
+
+.close-error {
+  background-color: #ff0037;
+  color: white;
+  padding: 1rem 1.7rem;
+  border: none;
+  text-align: end;
+  transition: 0.3s;
+}
+
+.close-error:hover {
+  background-color: #cc002c;
 }
