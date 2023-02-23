@@ -10,9 +10,9 @@ html {
 }
 
 .hidden {
-  opacity: 0;
-  visibility: hidden;
   display: none;
+  opacity: 0;
+  visibility: none;
 }
 
 body {
@@ -146,7 +146,7 @@ body {
   width: 100%;
   height: 100%;
   backdrop-filter: blur(0.1px);
-  transition: all 0.5s;
+  transition: all 0.3s;
 }
 
 .overlay-task {
@@ -160,6 +160,7 @@ body {
 }
 
 .section-task-input-modal {
+  transition: 0.3s;
   position: absolute;
   position: relative;
   width: 30vw;
