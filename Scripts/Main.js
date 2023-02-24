@@ -9,9 +9,32 @@ const errorModal = document.querySelector(".error-message");
 const errorOverlay = document.querySelector(".overlay-error");
 const errorModalCloseBtn = document.querySelector(".close-error");
 
+//INPUT FIELDS
+const taskTitleInput = document.querySelector(".user-input-title");
+const taskDescriptionInput = document.querySelector(".user-input-description");
+const taskDateInput = document.querySelector(".user-input-date");
+const taskPriorityInput = document.querySelector(".user-input-priority");
+
+const TodoListStorage = new Storage();
+
+TodoListStorage.determineStorage();
+TodoListStorage.setTodoListTasks({ joey: 123 });
+
 const createTaskModalSuccess = function () {
-  console.log("hi there guys");
+  const SingleTask = new Task(
+    taskTitleInput.value,
+    taskDescriptionInput.value,
+    taskDateInput.value,
+    taskPriorityInput.value
+  );
+  // console.log(SingleTask);
 };
+
+//USE THIS TO TEST IF THE APP IS CRUD
+// TodoListStorage.setTodoListTasks({ message: "HI THERE GUYS CRUD IS COOL" });
+// TodoListStorage.updateTodoListData();
+// console.log(TodoListStorage);
+// console.log(TodoListStorage.getTodoListTasks());
 
 const ErrorModal = new Modal(
   errorModal,

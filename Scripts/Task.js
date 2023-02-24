@@ -18,14 +18,15 @@ class Task {
     return this.#priority;
   }
 
-  convertToUSDate() {
-    return this.getDueDate();
+  setDateUS() {
+    return this.getDueDate().split("-").reverse().join("-");
   }
 
   constructor(title, description, dueDate, priority) {
     this.#title = title;
     this.#description = description;
     this.#dueDate = dueDate;
+    this.#dueDate = this.setDateUS();
     this.#priority = priority;
   }
 }

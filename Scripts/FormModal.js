@@ -53,6 +53,7 @@ class FormModal extends Modal {
           //If there isn't some field empty
           console.log("All fields are FILLED");
           obj.excuteSuccessFun();
+          //SUCCESS FUNCTION FROM HERE ON
           //Task.js - Create a new task object with the inputs
           //LocalStorage.js - add the task object to the local-storage array of objects
           //Todo-list.js - display the new todo list
