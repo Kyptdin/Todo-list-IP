@@ -12,24 +12,34 @@ class Modal {
     return this.#modal;
   }
 
-  getActionBtn() {
-    return this.#actionBtn;
+  getOverlay() {
+    return this.#overlay;
   }
 
   getCloseBtns() {
     return this.#closeBtns;
   }
 
+  getOpenBtns() {
+    return this.#actionBtn;
+  }
+
+  getActionBtn() {
+    return this.#actionBtn;
+  }
+
   hideModal() {
     this.getModal().classList.add("hidden");
-    this.#overlay.classList.add("hidden");
+    this.getOverlay().classList.add("hidden");
   }
 
   showModal() {
     // The this keyword here is the object that event listner is attached
     //However since I used bind the this keyword is now the OOP object
-    this.#modal.classList.remove("hidden");
-    this.#overlay.classList.remove("hidden");
+    this.getModal().classList.remove("hidden");
+    this.getModal().style.opacity = 100;
+    this.getOverlay().classList.remove("hidden");
+    this.getOverlay().style.opacity = 100;
   }
 
   //Do this with event prop in the Todo list class
@@ -68,20 +78,36 @@ class Modal {
   addModalEventProp() {
     // I couldn't use .bind because I'll get a reference error so I decided to create a copy of the this keyword
     const obj = this;
-    this.#modal.addEventListener("click", this.modalEventPropFun);
+    this.#modal.addEventListener("click", function () {
+      console.log("Event prog from the modal class");
+      const clicked = e.target;
+      const clickedParent = clicked.parentElement;
+
+      if (clicked === this) return;
+
+      if (obj.getCloseBtns().includes(clicked)) {
+        obj.hideModal.call(obj);
+        return;
+      }
+
+      if (obj.getCloseBtns().includes(clicked.parentElement)) {
+        obj.hideModal.call(obj);
+        return;
+      }
+    });
   }
 
   // If the object created is a sub class then the event progration form the constructor below will be removed
-  consolidateProp() {
-    if (!(this instanceof FormModal)) {
-      console.log("Isn't from the formmodal class");
-    } else {
-      // this.getModal().removeEventListner("click", this.modalEventPropFun);
-      const copy = this;
-      console.log("hi there mom");
-      this.getModal().removeEventListener("click", copy.modalEventPropFun);
-    }
-  }
+  // consolidateProp() {
+  //   if (!(this instanceof FormModal)) {
+  //     console.log("Isn't from the formmodal class");
+  //   } else {
+  //     // this.getModal().removeEventListner("click", this.modalEventPropFun);
+  //     const copy = this;
+  //     console.log("hi there mom");
+  //     this.getModal().removeEventListener("click", copy.modalEventPropFun);
+  //   }
+  // }
 
   constructor(modal, overlay, actionBtn, openBtns, closeBtns) {
     this.#modal = modal;
@@ -89,7 +115,8 @@ class Modal {
     this.#actionBtn = actionBtn;
     this.#openBtns = openBtns;
     this.#closeBtns = closeBtns;
-    this.addModalEventProp();
-    this.consolidateProp();
+    // MAYBE DON'T DO THIS INSTEAD DO THIS IN THE MAIN.JS
+    // this.addModalEventProp();
+    // this.consolidateProp();
   }
 }

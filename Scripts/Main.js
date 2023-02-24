@@ -9,6 +9,10 @@ const errorModal = document.querySelector(".error-message");
 const errorOverlay = document.querySelector(".overlay-error");
 const errorModalCloseBtn = document.querySelector(".close-error");
 
+const createTaskModalSuccess = function () {
+  console.log("hi there guys");
+};
+
 const ErrorModal = new Modal(
   errorModal,
   errorOverlay,
@@ -22,5 +26,12 @@ const CreateTaskModal = new FormModal(
   taskModalActionBtn,
   [taskModalOpenBtn1],
   [taskModalCloseBtn1, taskModalCloseBtn2],
-  ErrorModal
+  ErrorModal,
+  createTaskModalSuccess
 );
+
+// IT WORKS LIKE THIS GREAT
+// I NEED TO GET RID OF THE FUNCTIONS INSIDE THE CONTRUCTOR FUNCTION
+// THEY'RE MESSING UP THE THIS KEYWORD
+CreateTaskModal.addModalEventProp();
+ErrorModal.addModalEventProp();
