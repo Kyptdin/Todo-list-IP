@@ -13,11 +13,13 @@
     <link rel = 'stylesheet' href='style.css'/>
     <!-- All the scripts that make the todo list work -->
     <script defer src='Scripts/local-storage-test.js'></script>
-    <script defer src='Scripts/Modal.js'></script>
     <script defer src='Scripts/Task.js'></script>
     <script defer src='Scripts/Todo-list.js'></script>
+    <script defer src='Scripts/Modal.js'></script>
+    <script defer src='Scripts/FormModal.js'></script>
+    <!-- Main should always be last -->
     <script defer src='Scripts/Main.js'></script>
-    
+  
   </head>
   <body>
     <div class="todo-list">
@@ -54,9 +56,9 @@
 
     <!-- Overlay that's used when the modal appears -->
     <div class="overlay overlay-task hidden"></div>
-
+    <!-- HERE -->
     <!-- The modal that't collects input to create a task -->
-    <section class="section-task-input-modal hidden">
+    <section class="section-task-input-modal ">
       <header class="modal-header modal-header-task">
         <h2 class="modal-heading">Add Task</h2>
         <button class="close-modal-btn">
@@ -70,7 +72,7 @@
           <div class="task-input-title">    
             <div class="input-container">
             <label class="task-input-label" id="modal-title-label" for="modal-title">Title<span class="required-input">*</span></label>
-            <input class="user-input user-input-title" type="text" id="modal-title" name="modal-title">
+            <input class="user-input user-input-title required" type="text" id="modal-title" name="modal-title">
             </div>
           </div>
   
@@ -84,14 +86,14 @@
           <div class="task-input-date">
             <div class="input-container">
               <label class="task-input-label" id="modal-date-label" for="modal-date">Due Date<span class="required-input">*</span></label>
-              <input class="user-input user-input-date" type="date" id="modal-date" name="modal-date">
+              <input class="user-input user-input-date required" type="date" id="modal-date" name="modal-date">
             </div>
           </div>
   
           <div class="task-input-priority">
             <div class="input-container">
               <label class="task-input-label" id="modal-priority-label" for="modal-priority">Priority<span class="required-input">*</span></label>
-              <select name="priority" id="priority" class="user-input user-input-priority">
+              <select name="priority" id="priority" class="user-input user-input-priority required">
                 <option value="low">Not important</option>
                 <option value="medium">Slightly important</option>
                 <option value="high">Very important</option>

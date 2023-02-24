@@ -3,12 +3,25 @@
 class Modal {
   #modal;
   #overlay;
-  #closeBtn1;
-  #closeBtn2;
-  #openBtn1;
+  #closeBtns;
+  #openBtns;
+  // This is like a submit button for a modal or a press "okay" button on the modal
+  #actionBtn;
+
+  getModal() {
+    return this.#modal;
+  }
+
+  getActionBtn() {
+    return this.#actionBtn;
+  }
+
+  getCloseBtns() {
+    return this.#closeBtns;
+  }
 
   hideModal() {
-    this.modal.classList.add("hidden");
+    this.getModal().classList.add("hidden");
     this.#overlay.classList.add("hidden");
   }
 
@@ -19,10 +32,12 @@ class Modal {
     this.#overlay.classList.remove("hidden");
   }
 
-  addOpenBtnEventLis() {
-    // The this keyword here CreateTaskModal
-    this.#openBtn1.addEventListener("click", this.showModal.bind(this));
-  }
+  //Do this with event prop in the Todo list class
+  // addOpenBtnEventLis() {
+  //   this.#openBtns.forEach((btn) => {
+  //     btn.addEventListener("click", this.showModal.bind(this));
+  //   });
+  // }
 
   modalEventPropFunc(e) {
     if (e.target != e.currentTarget) {
@@ -30,34 +45,51 @@ class Modal {
     }
   }
 
-  sup() {
-    console.log(hi);
+  modalEventPropFun(e) {
+    console.log("Event prog from the modal class");
+    const clicked = e.target;
+    const clickedParent = clicked.parentElement;
+    console.log(clicked);
+    console.log(clickedParent);
+
+    if (clicked === this) return;
+
+    if (obj.#closeBtns.includes(clicked)) {
+      obj.hideModal.call(obj);
+      return;
+    }
+
+    if (obj.#closeBtns.includes(clicked.parentElement)) {
+      obj.hideModal.call(obj);
+      return;
+    }
   }
 
   addModalEventProp() {
     // I couldn't use .bind because I'll get a reference error so I decided to create a copy of the this keyword
     const obj = this;
-    this.#modal.addEventListener("click", function (e) {
-      const clicked = e.target;
-      //If you clicked the container stop
-      if (clicked === this) return;
-      if (clicked === obj.#closeBtn1) {
-        console.log("You clicked a close button 1");
-      }
-      if (clicked === obj.#closeBtn2) {
-        console.log("You clicked a close button 2");
-        console.log(obj.#closeBtn1);
-      }
-    });
+    this.#modal.addEventListener("click", this.modalEventPropFun);
   }
 
-  constructor(modal, overlay, closeBtn1, closeBtn2, openBtn1) {
+  // If the object created is a sub class then the event progration form the constructor below will be removed
+  consolidateProp() {
+    if (!(this instanceof FormModal)) {
+      console.log("Isn't from the formmodal class");
+    } else {
+      // this.getModal().removeEventListner("click", this.modalEventPropFun);
+      const copy = this;
+      console.log("hi there mom");
+      this.getModal().removeEventListener("click", copy.modalEventPropFun);
+    }
+  }
+
+  constructor(modal, overlay, actionBtn, openBtns, closeBtns) {
     this.#modal = modal;
     this.#overlay = overlay;
-    this.#closeBtn1 = closeBtn1;
-    this.#closeBtn2 = closeBtn2;
-    this.#openBtn1 = openBtn1;
-    this.addOpenBtnEventLis();
+    this.#actionBtn = actionBtn;
+    this.#openBtns = openBtns;
+    this.#closeBtns = closeBtns;
     this.addModalEventProp();
+    this.consolidateProp();
   }
 }
