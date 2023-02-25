@@ -18,7 +18,6 @@ const taskPriorityInput = document.querySelector(".user-input-priority");
 const TodoListStorage = new Storage();
 
 TodoListStorage.determineStorage();
-TodoListStorage.setTodoListTasks({ joey: 123 });
 
 const createTaskModalSuccess = function () {
   const SingleTask = new Task(
@@ -27,7 +26,8 @@ const createTaskModalSuccess = function () {
     taskDateInput.value,
     taskPriorityInput.value
   );
-  // console.log(SingleTask);
+  TodoListStorage.addTask(SingleTask);
+  // console.log(TodoListStorage.getTodoListTasks());
 };
 
 //USE THIS TO TEST IF THE APP IS CRUD

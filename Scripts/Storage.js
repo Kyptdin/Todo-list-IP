@@ -11,34 +11,44 @@ class Storage {
     this.#todoListTasks = e;
   }
 
-  // GETTERS AND SETTERS FOR THE INSTANCE VARIABLE
-  getLocalStorageObj() {
-    return JSON.parse(localStorage.getItem("todoListTasks"));
+  //ADD Task
+  addTask(t) {
+    console.log(this.getTodoListTasks());
+    // When I push in a string everything works
+    //When I push in an object, the object is displayed as empty in the local storage
+    // YOU CAN'T STORE ES6 OBJECTS INSIDE LOCAL STORAGE
+    const task = {};
+
+    this.getTodoListTasks().push(t);
+    this.#todoListTasks.tasks = JSON.stringify(this.#todoListTasks.tasks);
+    this.setLocalObj(this.getTodoListTasks());
   }
 
-  setLocalStorageObj(e) {
+  setLocalObj(e) {
     let objSer = JSON.stringify(e);
-    localStorage.setItem("todoListTasks", objSer);
+    console.log(objSer);
+    localStorage.setItem("userTodos", objSer);
   }
 
-  // UPDATE TODO LIST DATA
-  updateTodoListData() {
-    this.setLocalStorageObj(this.getTodoListTasks());
+  getLocalObj() {
+    const jsonObj = JSON.parse(localStorage.getItem("userTodos"));
+    return jsonObj;
   }
 
   determineStorage() {
     //If the localstorage value doesn't exist just the value to blank obj
-    if (!localStorage.getItem("todoListTasks")) {
-      console.log("Value doesn't exist");
-      this.setLocalStorageObj(this.getTodoListTasks());
+    if (!localStorage.getItem("userTodos")) {
+      console.log("Doesn't exist");
+      this.setLocalObj(this.getTodoListTasks());
     } else {
-      console.log("value does exist");
-      this.setTodoListTasks(this.getLocalStorageObj());
+      // If it does exist
+      console.log("Item exist");
+      this.#todoListTasks = this.getLocalObj();
     }
   }
 
   constructor() {
-    this.#todoListTasks = { tasks: [] };
+    this.#todoListTasks = [];
   }
 }
 
