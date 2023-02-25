@@ -1,47 +1,51 @@
 "use strict";
+/**MODAL USED TO CREATE A TASK**/
 const taskModal = document.querySelector(".section-task-input-modal");
 const taskOverlay = document.querySelector(".overlay-task");
 const taskModalCloseBtn1 = document.querySelector(".close-modal-btn");
 const taskModalCloseBtn2 = document.querySelector(".task-input-cancel");
 const taskModalOpenBtn1 = document.querySelector(".options-icon-add");
 const taskModalActionBtn = document.querySelector(".task-input-add");
-const errorModal = document.querySelector(".error-message");
-const errorOverlay = document.querySelector(".overlay-error");
-const errorModalCloseBtn = document.querySelector(".close-error");
-
-//INPUT FIELDS
+/**INPUTS REQUIRED TO CREATE A TASK**/
 const taskTitleInput = document.querySelector(".user-input-title");
 const taskDescriptionInput = document.querySelector(".user-input-description");
 const taskDateInput = document.querySelector(".user-input-date");
 const taskPriorityInput = document.querySelector(".user-input-priority");
-
+/**TODO LIST UI**/
+const taskCountEl = document.querySelector(".task-count");
+const todoFilterBtn = document.querySelector(".options-icon--filter");
+const todoAddBtn = document.querySelector(".options-icon--add");
+const tasksContainerEl = document.querySelector(".section-todo-list-task");
+/**ERROR MODAL THAT APPEARS**/
+const errorModal = document.querySelector(".error-message");
+const errorOverlay = document.querySelector(".overlay-error");
+const errorModalCloseBtn = document.querySelector(".close-error");
+/**DETERMINES THE MIMNIMUM DATE**/
+Dates.determineCurrentDate(taskDateInput);
 const TodoListStorage = new Storage();
 
-TodoListStorage.determineStorage();
+const ErrorModal = new Modal(errorModal, errorOverlay, null, null, [
+  errorModalCloseBtn,
+]);
+ErrorModal.addModalEventProp();
 
 const createTaskModalSuccess = function () {
+  // If the date is not valid don't store the todo
+  if (!Dates.isValidDate(taskDateInput)) {
+    CreateTaskModal.changeErrorModalMsg("Please select a proper date");
+    CreateTaskModal.showErrorModal();
+    return;
+  }
   const SingleTask = new Task(
     taskTitleInput.value,
     taskDescriptionInput.value,
     taskDateInput.value,
     taskPriorityInput.value
   );
+  SingleTask.setDateUS();
   TodoListStorage.addTask(SingleTask);
-  // console.log(TodoListStorage.getTodoListTasks());
+  TodoListUI.updateUI();
 };
-
-//USE THIS TO TEST IF THE APP IS CRUD
-// TodoListStorage.setTodoListTasks({ message: "HI THERE GUYS CRUD IS COOL" });
-// TodoListStorage.updateTodoListData();
-// console.log(TodoListStorage);
-// console.log(TodoListStorage.getTodoListTasks());
-
-const ErrorModal = new Modal(
-  errorModal,
-  errorOverlay,
-  null,
-  errorModalCloseBtn
-);
 
 const CreateTaskModal = new FormModal(
   taskModal,
@@ -52,9 +56,16 @@ const CreateTaskModal = new FormModal(
   ErrorModal,
   createTaskModalSuccess
 );
-
-// IT WORKS LIKE THIS GREAT
-// I NEED TO GET RID OF THE FUNCTIONS INSIDE THE CONTRUCTOR FUNCTION
-// THEY'RE MESSING UP THE THIS KEYWORD
 CreateTaskModal.addModalEventProp();
-ErrorModal.addModalEventProp();
+
+const TodoListUI = new TodoList(
+  taskCountEl,
+  todoFilterBtn,
+  todoAddBtn,
+  tasksContainerEl,
+  CreateTaskModal
+);
+
+if (TodoListStorage.determineStorage()) {
+  TodoListUI.updateUI();
+}

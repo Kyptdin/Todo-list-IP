@@ -16,10 +16,19 @@ class FormModal extends Modal {
     this.#successFunction();
   }
 
-  // Dom travesing to get all the element with the required class
-  // setAllRequired() {
-  //   this.#requiredInputs = this.getModal().querySelectorAll(".required");
-  // }
+  getEntireErrorModal() {
+    return this.#entireErrorModal;
+  }
+
+  showErrorModal() {
+    this.#entireErrorModal.showModal();
+  }
+
+  changeErrorModalMsg(msg) {
+    this.getEntireErrorModal()
+      .getModal()
+      .querySelector("p").textContent = `${msg}`;
+  }
 
   //Returns true or false if EVERY required input is not filled in
   isSomeRequiredEmpty() {
@@ -48,15 +57,14 @@ class FormModal extends Modal {
       if (clicked === obj.getActionBtn()) {
         //If there's some fields that aren't filled out
         if (obj.isSomeRequiredEmpty.call(obj)) {
-          console.log("Some fields not filled out");
+          CreateTaskModal.changeErrorModalMsg(
+            "Please fill in all required fields"
+          );
+          CreateTaskModal.showErrorModal();
         } else {
-          //If there isn't some field empty
           console.log("All fields are FILLED");
           obj.excuteSuccessFun();
-          //SUCCESS FUNCTION FROM HERE ON
-          //Task.js - Create a new task object with the inputs
-          //LocalStorage.js - add the task object to the local-storage array of objects
-          //Todo-list.js - display the new todo list
+          // TodoListUI.displayAllTask(TodoListStorage);
         }
         return;
       }

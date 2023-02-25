@@ -19,14 +19,14 @@ class Task {
   }
 
   setDateUS() {
-    return this.getDueDate().split("-").reverse().join("-");
+    const [year, month, day] = this.getDueDate().split("-");
+    this.#dueDate = `${month}-${day}-${year}`;
   }
 
   constructor(title, description, dueDate, priority) {
     this.#title = title;
     this.#description = description;
     this.#dueDate = dueDate;
-    this.#dueDate = this.setDateUS();
     this.#priority = priority;
   }
 }

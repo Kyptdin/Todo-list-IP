@@ -37,17 +37,8 @@ class Modal {
     // The this keyword here is the object that event listner is attached
     //However since I used bind the this keyword is now the OOP object
     this.getModal().classList.remove("hidden");
-    this.getModal().style.opacity = 100;
     this.getOverlay().classList.remove("hidden");
-    this.getOverlay().style.opacity = 100;
   }
-
-  //Do this with event prop in the Todo list class
-  // addOpenBtnEventLis() {
-  //   this.#openBtns.forEach((btn) => {
-  //     btn.addEventListener("click", this.showModal.bind(this));
-  //   });
-  // }
 
   modalEventPropFunc(e) {
     if (e.target != e.currentTarget) {
@@ -78,20 +69,22 @@ class Modal {
   addModalEventProp() {
     // I couldn't use .bind because I'll get a reference error so I decided to create a copy of the this keyword
     const obj = this;
-    this.#modal.addEventListener("click", function () {
-      console.log("Event prog from the modal class");
+    this.#modal.addEventListener("click", function (e) {
+      e.stopPropagation();
+      e.preventDefault();
       const clicked = e.target;
       const clickedParent = clicked.parentElement;
+      console.log("Event propgating");
 
       if (clicked === this) return;
 
       if (obj.getCloseBtns().includes(clicked)) {
-        obj.hideModal.call(obj);
+        obj.hideModal();
         return;
       }
 
       if (obj.getCloseBtns().includes(clicked.parentElement)) {
-        obj.hideModal.call(obj);
+        obj.hideModal();
         return;
       }
     });

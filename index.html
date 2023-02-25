@@ -12,14 +12,15 @@
     <!-- Links to style sheet and script -->
     <link rel = 'stylesheet' href='style.css'/>
     <!-- All the scripts that make the todo list work -->
-    <script defer src='Scripts/Storage.js'></script>
-    <script defer src='Scripts/Task.js'></script>
-    <script defer src='Scripts/Todo-list.js'></script>
+    <script defer src='Scripts/Dates.js'></script>
     <script defer src='Scripts/Modal.js'></script>
     <script defer src='Scripts/FormModal.js'></script>
+    <script defer src='Scripts/Task.js'></script>
+    <script defer src='Scripts/Storage.js'></script>
+    <script defer src='Scripts/TodoList.js'></script>
     <!-- Main should always be last -->
     <script defer src='Scripts/Main.js'></script>
-  
+
   </head>
   <body>
     <div class="todo-list">
@@ -30,15 +31,19 @@
       <main class="todo-list-app">
       <!-- Here's the todo list options such as filthering-->
       <div class="todo-list-options">
-        <div class="task-count">Tasks (1)</div>
+        <div class="task-count">Tasks (0)</div>
         <div class="actions">
-         <ion-icon class = "options-icon" name="filter-sharp"></ion-icon>
-         <ion-icon class = "options-icon options-icon-add" name="add-circle-outline"></ion-icon>
+          <button class="options-icon options-icon--filter">
+            <ion-icon name="filter-sharp"></ion-icon>
+          </button>
+          <button class = "options-icon options-icon--add">
+            <ion-icon name="add-circle-outline"></ion-icon>
+          </button>
         </div>
       </div>
       <!-- Here are all the individual task to accoplish -->
       <section class="section-todo-list-task">
-        <div class="todo-list-task">
+        <!-- <div class="todo-list-task">
           <div class="task-left">
             <ion-icon class="task-uncheck" name="ellipse-outline"></ion-icon>
             <div class="todo-list-task-heading">Get money</div>
@@ -49,7 +54,7 @@
             <ion-icon class="task-option task-option-trash" name="trash-outline"></ion-icon>
             <ion-icon class="task-option tash-option-info" name="information-circle-outline"></ion-icon>
           </div>
-        </div>
+        </div> -->
       </section>
       </main>
     </div>
@@ -79,7 +84,7 @@
           <div class="task-input-description">
             <div class="input-container">
               <label class="task-input-label" id="model-description-label" for="modal-description">Description</label>
-              <textarea  class="user-inpu user-input-description" name="description-text" id="modal-description" cols="30" rows="4"></textarea>
+              <textarea  class="user-input user-input-description" name="description-text" id="modal-description" cols="30" rows="4"></textarea>
             </div>
           </div>
   
