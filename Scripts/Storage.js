@@ -21,12 +21,14 @@ class Storage {
       description: t.getDescription(),
       dueDate: t.getDueDate(),
       priority: t.getPriority(),
+      strike: false,
     };
 
     this.getTodoListTasks().push(taskLiteral);
     this.setLocalObj(this.getTodoListTasks());
   }
 
+  // GETTERS AND SETTERS TO GET THE LOCAL STORAGE OBJECT
   setLocalObj(e) {
     let objSer = JSON.stringify(e);
     localStorage.setItem("userTodos", objSer);
@@ -37,17 +39,33 @@ class Storage {
     return jsonObj;
   }
 
+  updateStrike(indexOfObject) {
+    const currentStrike = this.getTodoListTasks()[indexOfObject].strike;
+    console.log(currentStrike);
+    if (currentStrike) {
+      this.getTodoListTasks()[indexOfObject].strike = false;
+    } else {
+      this.getTodoListTasks()[indexOfObject].strike = true;
+    }
+    this.setLocalObj(this.getTodoListTasks());
+  }
+
+  deleteTask(indexOfObject) {
+    //Delete object from the object stored in code
+    this.getTodoListTasks().splice(indexOfObject, 1);
+    this.setLocalObj(this.getTodoListTasks());
+  }
+
   determineStorage() {
     //If the localstorage value doesn't exist just the value to blank obj
     if (!localStorage.getItem("userTodos")) {
       //Doesnt' exist
       this.setLocalObj(this.getTodoListTasks());
       return false;
-    } else {
-      //Does exist
-      this.#todoListTasks = this.getLocalObj();
-      return true;
     }
+    //Does exist
+    this.#todoListTasks = this.getLocalObj();
+    return true;
   }
 
   constructor() {

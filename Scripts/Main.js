@@ -16,6 +16,7 @@ const taskCountEl = document.querySelector(".task-count");
 const todoFilterBtn = document.querySelector(".options-icon--filter");
 const todoAddBtn = document.querySelector(".options-icon--add");
 const tasksContainerEl = document.querySelector(".section-todo-list-task");
+const todoListUI = document.querySelector(".todo-list");
 /**ERROR MODAL THAT APPEARS**/
 const errorModal = document.querySelector(".error-message");
 const errorOverlay = document.querySelector(".overlay-error");
@@ -63,8 +64,11 @@ const TodoListUI = new TodoList(
   todoFilterBtn,
   todoAddBtn,
   tasksContainerEl,
-  CreateTaskModal
+  CreateTaskModal,
+  todoListUI
 );
+//PASS THE STORAGE OBJECT RIGHT HERE
+TodoListUI.addTodoEventProp(TodoListStorage);
 
 if (TodoListStorage.determineStorage()) {
   TodoListUI.updateUI();

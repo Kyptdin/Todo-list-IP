@@ -116,9 +116,16 @@ body {
   align-items: center;
 }
 
-.task-uncheck {
+.task-status {
   font-size: 1.8rem;
   cursor: pointer;
+  background: none;
+  border: none;
+  padding-top: 0.5rem;
+}
+
+.striked {
+  text-decoration: line-through;
 }
 
 .todo-list-task-heading {
@@ -130,6 +137,8 @@ body {
 .task-date,
 .task-option {
   font-family: inherit;
+  background: none;
+  border: none;
 }
 
 .task-date {
@@ -320,4 +329,8 @@ body {
 
 .close-error:hover {
   background-color: #cc002c;
+}
+
+.strike {
+  text-decoration: line-through;
 }

@@ -4,6 +4,7 @@ class TodoList {
   #createTaskBtn;
   #todoListContainerEl;
   #taskCreateModal;
+  #todoListUI;
 
   getTodoCountEl() {
     return this.#todoCountEl;
@@ -25,16 +26,28 @@ class TodoList {
     storageObj.forEach((ob, i) =>
       this.#todoListContainerEl.insertAdjacentHTML(
         "beforeend",
-        `<div class="todo-list-task" data-task-index ="${i}">
+        ` <div class="todo-list-task" data-index="${i}">
           <div class="task-left">
-            <ion-icon class="task-uncheck md hydrated" name="ellipse-outline" role="img" aria-label="ellipse outline"></ion-icon>
-            <div class="todo-list-task-heading">${ob.title}</div>
+            <button class="task-status">
+              <ion-icon name="${
+                ob.strike ? "checkmark-circle-outline" : "ellipse-outline"
+              }"></ion-icon>
+            </button>
+            <div class="todo-list-task-heading ${
+              ob.strike === true ? "strike" : " "
+            }">${ob.title}</div>
           </div>
           <div class="task-right">
             <div class="task-date">${ob.dueDate}</div>
-            <ion-icon class="task-option task-option-edit md hydrated" name="create-outline" role="img" aria-label="create outline"></ion-icon>
-            <ion-icon class="task-option task-option-trash md hydrated" name="trash-outline" role="img" aria-label="trash outline"></ion-icon>
-            <ion-icon class="task-option tash-option-info md hydrated" name="information-circle-outline" role="img" aria-label="information circle outline"></ion-icon>
+            <button class="task-option task-option--edit">
+              <ion-icon name="create-outline"></ion-icon>
+            </button>
+            <button class="task-option task-option--trash">
+                 <ion-icon name="trash-outline"></ion-icon>
+            </button>
+            <button class="task-option tash-option--info">
+                 <ion-icon name="information-circle-outline"></ion-icon>
+            </button>
           </div>
         </div>`
       )
@@ -42,20 +55,55 @@ class TodoList {
   }
 
   changeTaskCount(storageOb) {
-    this.getTodoCountEl().textContent = `Task (${storageOb.length})`;
+    console.log("Accessed");
+    this.getTodoCountEl().textContent = `Task${
+      storageOb.length > 1 ? "s" : ""
+    }(${storageOb.length})`;
   }
 
   updateUI() {
     const jsonObj = JSON.parse(localStorage.getItem("userTodos"));
+    this.changeTaskCount(this);
     this.getTodoListContainerEl().innerHTML = "";
     this.displayAllTask(jsonObj);
     this.changeTaskCount(jsonObj);
   }
 
-  addTodoEventProp() {
+  //HUGE IDEA I'M GOING TO PASS THE STORAGE OBJECT HERE TO MULTIPLATE THE DATA
+  addTodoEventProp(storage) {
     const obj = this;
-    this.getTodoListContainerEl().addEventListner("click", function () {
-      console.log("sup");
+    this.#todoListUI.addEventListener("click", function (e) {
+      e.preventDefault();
+      const clicked = e.target;
+      console.log(clicked);
+      const clickedTaskOpt = clicked.closest(".task-option");
+      const clickedTodoOpt = clicked.closest(".options-icon");
+      const clickedStatusBtn = clicked.closest(".task-status");
+
+      //If the user didn't click a button with a purpose just return
+      if (!clickedTaskOpt && !clickedTodoOpt && !clickedStatusBtn) return;
+
+      // Clicked the check button
+      if (clickedStatusBtn) {
+        const dataSetStored =
+          clickedStatusBtn.closest(".todo-list-task").dataset.index;
+        storage.updateStrike(dataSetStored);
+        obj.updateUI();
+        return;
+      }
+
+      if (clickedTaskOpt) {
+        if (clickedTaskOpt.closest(".task-option--trash")) {
+          const dataSetStored =
+            clicked.closest(".todo-list-task").dataset.index;
+          storage.deleteTask(dataSetStored);
+          obj.updateUI();
+          return;
+        }
+
+        if (clickedTaskOpt.closest(".tash-option--info")) {
+        }
+      }
     });
   }
 
@@ -64,12 +112,14 @@ class TodoList {
     filterBtn,
     createTaskBtn,
     todoListContainer,
-    taskCreateModal
+    taskCreateModal,
+    todoListUI
   ) {
     this.#todoCountEl = todoCount;
     this.#filterBtn = filterBtn;
     this.#createTaskBtn = createTaskBtn;
     this.#todoListContainerEl = todoListContainer;
     this.#taskCreateModal = taskCreateModal;
+    this.#todoListUI = todoListUI;
   }
 }
