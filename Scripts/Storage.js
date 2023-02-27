@@ -20,7 +20,7 @@ class Storage {
       title: t.getTitle(),
       description: t.getDescription(),
       dueDate: t.getDueDate(),
-      priority: t.getPriority(),
+      // priority: t.getPriority(),
       strike: false,
     };
 
@@ -54,6 +54,11 @@ class Storage {
     //Delete object from the object stored in code
     this.getTodoListTasks().splice(indexOfObject, 1);
     this.setLocalObj(this.getTodoListTasks());
+  }
+
+  getTaskDesc(indexOfObject) {
+    const todoList = this.getTodoListTasks();
+    return todoList[indexOfObject].description;
   }
 
   determineStorage() {

@@ -43,12 +43,13 @@ class FormModal extends Modal {
     );
   }
 
-  addModalEventProp() {
+  addModalEventProp(storage) {
     const obj = this;
     // console.log(this.getRequiredInputs());
     this.getModal().addEventListener("click", function (e) {
       const clicked = e.target;
       const clickedParent = clicked.parentElement;
+      console.log(e.target, e.target.parentElement);
 
       //If the container was clicked just return
       if (clicked === this) return;
@@ -64,21 +65,28 @@ class FormModal extends Modal {
         } else {
           console.log("All fields are FILLED");
           obj.excuteSuccessFun();
-          // TodoListUI.displayAllTask(TodoListStorage);
         }
         return;
       }
 
       // If the user clicked the close button
-      if (obj.getCloseBtns().includes(clicked)) {
-        obj.hideModal.call(obj);
-        return;
+      if (obj.getCloseBtns().includes(e.target)) {
+        obj.hideModal();
+        const editIndex = -1;
+        // 3. Go through all the objects and find the object with the edit property
+        storage.getTodoListTasks().forEach((ob, i) => {
+          if (ob.edit) {
+            editIndex = i;
+            return;
+          }
+        });
       }
-
+      // 4. Delete the edit property of the object
+      // RIGHT HERE
       /*If the user clicked the close button but the clicked element was nested 
       inside the close button */
-      if (obj.getCloseBtns().includes(clicked.parentElement)) {
-        obj.hideModal.call(obj);
+      if (obj.getCloseBtns().includes(e.target.parentElement)) {
+        obj.hideModal();
         return;
       }
     });

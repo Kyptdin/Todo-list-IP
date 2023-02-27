@@ -169,16 +169,22 @@ body {
   background-color: rgba(255, 255, 255, 0.8);
   z-index: 7;
 }
+.overlay-desc,
+.overlay-edit {
+  background-color: rgba(255, 255, 255, 0.5);
+}
 
 .overlay-error {
   background-color: rgba(0, 0, 0, 0.2);
   z-index: 9;
 }
 
-.section-task-input-modal {
+/* Modal used to create a task */
+.section-task-input-modal,
+.section-task-edit-modal {
   transition: all 0.3s ease-in;
   position: absolute;
-  position: relative;
+  /* position: relative; */
   width: 30vw;
   height: 85vh;
   background-color: white;
@@ -188,6 +194,8 @@ body {
   z-index: 8;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
+
+/* Modal used to edit a task */
 
 .modal-header {
   padding: 1.2rem 2.5rem;
@@ -207,7 +215,8 @@ body {
   font-size: 2.2rem;
 }
 
-.close-modal-btn {
+.close-modal-btn,
+.close-modal-btn--edit {
   color: white;
   position: absolute;
   font-size: 4rem;
@@ -249,7 +258,8 @@ body {
   border: 2px solid #127aff;
 }
 
-.user-input-title {
+.user-input-title,
+.user-edit-title {
   padding: 1rem;
 }
 
@@ -314,6 +324,21 @@ body {
   z-index: 10;
 }
 
+/* Newly added */
+.task-description {
+  background-color: red;
+  position: absolute;
+  height: auto;
+  width: 25vw;
+  background-color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in;
+  z-index: 100;
+}
+
 .modal-message {
   font-size: 1.6rem;
   margin-bottom: 1.2rem;
@@ -321,6 +346,15 @@ body {
 
 .close-error {
   background-color: #ff0037;
+  color: white;
+  padding: 1rem 1.7rem;
+  border: none;
+  text-align: end;
+}
+
+/* Newly added */
+.close-description {
+  background-color: #127aff;
   color: white;
   padding: 1rem 1.7rem;
   border: none;

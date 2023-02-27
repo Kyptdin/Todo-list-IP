@@ -21,13 +21,53 @@ const todoListUI = document.querySelector(".todo-list");
 const errorModal = document.querySelector(".error-message");
 const errorOverlay = document.querySelector(".overlay-error");
 const errorModalCloseBtn = document.querySelector(".close-error");
-/**DETERMINES THE MIMNIMUM DATE**/
-Dates.determineCurrentDate(taskDateInput);
+/**DESCRIPTION MODAL**/
+const taskDescModal = document.querySelector(".task-description");
+const taskDescModalOverlay = document.querySelector(".overlay-desc");
+const taskDescModalCloseBtn = document.querySelector(".close-description");
+/**MODAL USED TO EDIT A TASK**/
+const taskEditModal = document.querySelector(".section-task-edit-modal");
+const taskEditModalOverlay = document.querySelector(".overlay-edit");
+const taskEditModalCloseBtn1 = document.querySelector(".close-modal-btn--edit");
+const taskEditModalCloseBtn2 = document.querySelector(".task-edit-cancel");
+const taskEditModalActionBtn = document.querySelector(".task-edit-add");
+
+console.log(taskEditModalCloseBtn1, taskEditModalCloseBtn2);
 const TodoListStorage = new Storage();
+
+const taskEditFun = function () {
+  //3. Go through the array until you find an object with edit : true
+  //4. Set that object's properties to the input values
+  //5. Remove the edit property
+  //6. Update the data
+};
 
 const ErrorModal = new Modal(errorModal, errorOverlay, null, null, [
   errorModalCloseBtn,
 ]);
+
+const TaskEditModal = new FormModal(
+  taskEditModal,
+  taskEditModalOverlay,
+  taskEditModalActionBtn,
+  null,
+  [taskEditModalCloseBtn1, taskEditModalCloseBtn2],
+  ErrorModal,
+  taskEditFun
+);
+
+TaskEditModal.addModalEventProp();
+
+const TaskDescModal = new Modal(
+  taskDescModal,
+  taskDescModalOverlay,
+  null,
+  null,
+  [taskDescModalCloseBtn]
+);
+
+TaskDescModal.addModalEventProp();
+
 ErrorModal.addModalEventProp();
 
 const createTaskModalSuccess = function () {
@@ -40,8 +80,8 @@ const createTaskModalSuccess = function () {
   const SingleTask = new Task(
     taskTitleInput.value,
     taskDescriptionInput.value,
-    taskDateInput.value,
-    taskPriorityInput.value
+    taskDateInput.value
+    // taskPriorityInput.value
   );
   SingleTask.setDateUS();
   TodoListStorage.addTask(SingleTask);
@@ -65,7 +105,9 @@ const TodoListUI = new TodoList(
   todoAddBtn,
   tasksContainerEl,
   CreateTaskModal,
-  todoListUI
+  todoListUI,
+  TaskDescModal,
+  TaskEditModal
 );
 //PASS THE STORAGE OBJECT RIGHT HERE
 TodoListUI.addTodoEventProp(TodoListStorage);
@@ -73,3 +115,4 @@ TodoListUI.addTodoEventProp(TodoListStorage);
 if (TodoListStorage.determineStorage()) {
   TodoListUI.updateUI();
 }
+Dates.determineCurrentDate(taskDateInput);

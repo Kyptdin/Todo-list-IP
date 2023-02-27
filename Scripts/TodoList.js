@@ -5,9 +5,15 @@ class TodoList {
   #todoListContainerEl;
   #taskCreateModal;
   #todoListUI;
+  #taskDesModal;
+  #taskEditModal;
 
   getTodoCountEl() {
     return this.#todoCountEl;
+  }
+
+  getTaskEditModal() {
+    return this.#taskEditModal;
   }
 
   getFiltherBtn() {
@@ -20,6 +26,14 @@ class TodoList {
 
   getTodoListContainerEl() {
     return this.#todoListContainerEl;
+  }
+
+  getTaskCreateModal() {
+    return this.#taskCreateModal;
+  }
+
+  getTaskDesModal() {
+    return this.#taskDesModal;
   }
 
   displayAllTask(storageObj) {
@@ -45,7 +59,7 @@ class TodoList {
             <button class="task-option task-option--trash">
                  <ion-icon name="trash-outline"></ion-icon>
             </button>
-            <button class="task-option tash-option--info">
+            <button class="task-option task-option--info">
                  <ion-icon name="information-circle-outline"></ion-icon>
             </button>
           </div>
@@ -69,13 +83,16 @@ class TodoList {
     this.changeTaskCount(jsonObj);
   }
 
+  showCreateTaskModal() {
+    this.getTaskCreateModal().showModal();
+  }
+
   //HUGE IDEA I'M GOING TO PASS THE STORAGE OBJECT HERE TO MULTIPLATE THE DATA
   addTodoEventProp(storage) {
     const obj = this;
     this.#todoListUI.addEventListener("click", function (e) {
       e.preventDefault();
       const clicked = e.target;
-      console.log(clicked);
       const clickedTaskOpt = clicked.closest(".task-option");
       const clickedTodoOpt = clicked.closest(".options-icon");
       const clickedStatusBtn = clicked.closest(".task-status");
@@ -101,7 +118,37 @@ class TodoList {
           return;
         }
 
-        if (clickedTaskOpt.closest(".tash-option--info")) {
+        if (clickedTaskOpt.closest(".task-option--info")) {
+          const dataSetStored =
+            clicked.closest(".todo-list-task").dataset.index;
+          // const message = obj.getTaskDesModal().querySelector(".modal-message");
+          // message.textContent = `${storage.getTaskDesc(dataSetStored)}`;
+          const message = obj
+            .getTaskDesModal()
+            .getModal()
+            .querySelector(".modal-message");
+          message.textContent = `${storage.getTaskDesc(dataSetStored)}`;
+          obj.getTaskDesModal().showModal();
+          return;
+        }
+
+        if (clickedTaskOpt.closest(".task-option--edit")) {
+          console.log("You clicked the edit button yay!");
+          obj.getTaskEditModal().showModal();
+          //1. Get the index of the clicked object
+          const dataSetStored =
+            clicked.closest(".todo-list-task").dataset.index;
+          console.log(dataSetStored);
+          //2. Set the edit to true inside the object
+          storage.getTodoListTasks()[dataSetStored].edit = true;
+          console.log(storage.getTodoListTasks());
+        }
+      }
+
+      if (clickedTodoOpt) {
+        if (clickedTodoOpt.closest(".options-icon--add")) {
+          obj.showCreateTaskModal();
+          return;
         }
       }
     });
@@ -113,7 +160,9 @@ class TodoList {
     createTaskBtn,
     todoListContainer,
     taskCreateModal,
-    todoListUI
+    todoListUI,
+    taskDesModal,
+    taskEditModal
   ) {
     this.#todoCountEl = todoCount;
     this.#filterBtn = filterBtn;
@@ -121,5 +170,7 @@ class TodoList {
     this.#todoListContainerEl = todoListContainer;
     this.#taskCreateModal = taskCreateModal;
     this.#todoListUI = todoListUI;
+    this.#taskDesModal = taskDesModal;
+    this.#taskEditModal = taskEditModal;
   }
 }

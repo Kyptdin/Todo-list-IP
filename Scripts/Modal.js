@@ -28,12 +28,12 @@ class Modal {
     return this.#actionBtn;
   }
 
-  hideModal() {
+  hideModal(b) {
     this.getModal().classList.add("hidden");
     this.getOverlay().classList.add("hidden");
   }
 
-  showModal() {
+  showModal(b) {
     // The this keyword here is the object that event listner is attached
     //However since I used bind the this keyword is now the OOP object
     this.getModal().classList.remove("hidden");

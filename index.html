@@ -43,35 +43,17 @@
       </div>
       <!-- Here are all the individual task to accoplish -->
       <section class="section-todo-list-task">
-        <!-- <div class="todo-list-task">
-          <div class="task-left">
-            <button class="task-uncheck">
-              <ion-icon name="ellipse-outline"></ion-icon>
-            </button>
-            <div class="todo-list-task-heading">Get money</div>
-          </div>
-          <div class="task-right">
-            <div class="task-date">2/21/2023</div>
-            <button class="task-option task-option--edit">
-              <ion-icon name="create-outline"></ion-icon>
-            </button>
-            <button class="task-option task-option--trash">
-                 <ion-icon name="trash-outline"></ion-icon>
-            </button>
-            <button class="task-option tash-option--info">
-                 <ion-icon name="information-circle-outline"></ion-icon>
-            </button>
-          </div>
-        </div> -->
       </section>
       </main>
     </div>
 
     <!-- Overlay that's used when the modal appears -->
     <div class="overlay overlay-task hidden"></div>
+    <div class="overlay overlay-desc hidden"></div>
+    <div class="overlay overlay-edit hidden"></div>
     <!-- HERE -->
     <!-- The modal that't collects input to create a task -->
-    <section class="section-task-input-modal ">
+    <section class="section-task-input-modal hidden">
       <header class="modal-header modal-header-task">
         <h2 class="modal-heading">Add Task</h2>
         <button class="close-modal-btn">
@@ -102,17 +84,7 @@
               <input class="user-input user-input-date required" type="date" id="modal-date" name="modal-date">
             </div>
           </div>
-  
-          <div class="task-input-priority">
-            <div class="input-container">
-              <label class="task-input-label" id="modal-priority-label" for="modal-priority">Priority<span class="required-input">*</span></label>
-              <select name="priority" id="priority" class="user-input user-input-priority required">
-                <option value="low">Not important</option>
-                <option value="medium">Slightly important</option>
-                <option value="high">Very important</option>
-              </select>
-            </div>
-          </div>
+
         </form>
         <div class="modal-buttons">
           <button class="task-input-cancel">Cancel</button>
@@ -120,10 +92,48 @@
         </div>
       </div>
     </section>
+  
+    <!-- Modal that's used to edit input -->
+        <section class="section-task-edit-modal hidden">
+      <header class="modal-header modal-header-task">
+        <h2 class="modal-heading">Edit Task</h2>
+        <button class="close-modal-btn close-modal-btn--edit">
+        <ion-icon name="close-sharp"></ion-icon>
+      </button>
+      </header>
+      <div class="modal-body">
 
-    
-    <div class="overlay overlay-error hidden"></div>
-    
+        <!-- The form that includes all input -->
+        <form id="form" name="form">
+          <div class="task-input-title task-edit-title">    
+            <div class="input-container">
+            <label class="task-input-label" id="modal-title-label" for="modal-title">Title<span class="required-input">*</span></label>
+            <input class="user-input user-input-title required" type="text" id="modal-title" name="modal-title">
+            </div>
+          </div>
+  
+          <div class="task-input-description">
+            <div class="input-container">
+              <label class="task-input-label" id="model-description-label" for="modal-description">Description</label>
+              <textarea  class="user-input user-input-description task-edit-description" name="description-text" id="modal-description" cols="30" rows="4"></textarea>
+            </div>
+          </div>
+  
+          <div class="task-input-date">
+            <div class="input-container">
+              <label class="task-input-label" id="modal-date-label" for="modal-date">Due Date<span class="required-input">*</span></label>
+              <input class="user-input user-input-date  user-edit-date required" type="date" id="modal-date" name="modal-date">
+            </div>
+          </div>
+
+        </form>
+        <div class="modal-buttons">
+          <button class="task-input-cancel task-edit-cancel">Cancel</button>
+          <button class="task-input-add task-edit-add">Edit</button>
+        </div>
+      </div>
+    </section>
+
     <div class="error-message hidden">
       <header class="modal-header modal-header-error">
         <h2 class="modal-heading">Error</h2>
@@ -135,6 +145,23 @@
         </div>
       </div>
     </div>
+
+    <div class="overlay overlay-error hidden"></div>
+  
+    <div class="task-description hidden">
+      <header class="modal-header modal-header-task">
+        <h2 class="modal-heading">Task Description</h2>
+      </header>
+      <div class="modal-body">
+        <p class="modal-message">Task desc</p>
+        <div class="modal-buttons">
+          <button class="close-description">OK</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL USED TO EDIT THE VALUES OF THE -->
+    
 
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
