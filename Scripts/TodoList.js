@@ -53,9 +53,6 @@ class TodoList {
           </div>
           <div class="task-right">
             <div class="task-date">${ob.dueDate}</div>
-            <button class="task-option task-option--edit">
-              <ion-icon name="create-outline"></ion-icon>
-            </button>
             <button class="task-option task-option--trash">
                  <ion-icon name="trash-outline"></ion-icon>
             </button>
@@ -68,6 +65,9 @@ class TodoList {
     );
   }
 
+  /**  <button class="task-option task-option--edit">
+              <ion-icon name="create-outline"></ion-icon>
+            </button> */
   changeTaskCount(storageOb) {
     console.log("Accessed");
     this.getTodoCountEl().textContent = `Task${
